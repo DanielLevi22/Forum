@@ -23,6 +23,7 @@ model User {
   password  String
   questions Question[]
   Answers   Answer[]
+  comments  Comment[]
 
   @@map("users")
 }
@@ -40,7 +41,9 @@ model Question {
   author     User    @relation(fields: [authorId], references: [id])
   bestAnswer Answer? @relation("bestAnswer", fields: [bestAnswerId], references: [id])
 
-  answers Answer[]
+  answers     Answer[]
+  comments    Comment[]
+  attachments Attachhment[]
 
   @@map("questions")
 }
@@ -52,11 +55,41 @@ model Answer {
   updatedAt  DateTime? @updatedAt @map("updated_at")
   questionId String    @map("question_id")
 
-  authorId     String    @map("author_id")
-  author       User      @relation(fields: [authorId], references: [id])
-  bestAnswerOn Question? @relation("bestAnswer")
-  question     Question  @relation(fields: [questionId], references: [id])
+  authorId     String        @map("author_id")
+  author       User          @relation(fields: [authorId], references: [id])
+  bestAnswerOn Question?     @relation("bestAnswer")
+  question     Question      @relation(fields: [questionId], references: [id])
+  comments     Comment[]
+  attachments  Attachhment[]
 
   @@map("answers")
 }
 
+model Comment {
+  id         String    @id @default(uuid())
+  content    String
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime? @updatedAt @map("updated_at")
+  authorId   String    @map("author_id")
+  questionId String?   @map("question_id")
+  answerId   String?   @map("answer_id")
+
+  author   User      @relation(fields: [authorId], references: [id])
+  question Question? @relation(fields: [questionId], references: [id])
+  answer   Answer?   @relation(fields: [answerId], references: [id])
+
+  @@map("comments")
+}
+
+model Attachhment {
+  id         String  @id @default(uuid())
+  title      String
+  url        String
+  questionId String? @map("question_id")
+  answerId   String? @map("answer_id")
+
+  question Question? @relation(fields: [questionId], references: [id])
+  answer   Answer?   @relation(fields: [answerId], references: [id])
+
+  @@map("attachements")
+}
