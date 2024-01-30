@@ -10,9 +10,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
 
   constructor(
     private prisma: PrismaService
-  ) {
-
-  }
+  ) {}
 
 async  findById(id: string): Promise<Question | null> {
     const question = await this.prisma.question.findUnique({
