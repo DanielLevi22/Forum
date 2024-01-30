@@ -6,6 +6,7 @@ import { PrismaService } from "@/infra/database/prisma/prisma.service";
 describe('Create account (E2E)', () => {
   let app: INestApplication;
   let prisma: PrismaService
+ 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
