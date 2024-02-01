@@ -7,7 +7,7 @@ import { JwtService } from "@nestjs/jwt";
 import { QuestionFactory } from "test/factories/make-question";
 import { StudentFactory } from "test/factories/make-student";
 import { DataBaseModule } from "@/infra/database/database.module";
-describe('Edit question (E2E)', () => {
+describe('Answer question (E2E)', () => {
   let app: INestApplication;
   let jwt: JwtService
   let studentFactory: StudentFactory
@@ -32,7 +32,7 @@ describe('Edit question (E2E)', () => {
 
     await app.init();
   });
-  test('[PUT] /questions/:id', async() => {
+  test('[POST] /questions/:questionId/answer', async() => {
 
    const user = await studentFactory.makePrismaStudent()
 
@@ -45,22 +45,20 @@ describe('Edit question (E2E)', () => {
   const questionId = question.id.toString()
 
   const response = await request(app.getHttpServer())
-  .put(`/questions/${questionId}`)
+  .post(`/questions/${questionId}/answers`)
   .set('Authorization', 'Bearer ' + accessToken)
   .send({
-      title:'New title',
-      content: 'New Content',
+      content: 'New answer',
     })
-    expect(response.statusCode).toEqual(204)
+    expect(response.statusCode).toEqual(201)
   
-    const questionOnDataBase =  await prisma.question.findFirst({
+    const answerOnDatabase =  await prisma.answer.findFirst({
       where: {
-        title:'New title',
-        content: 'New Content',
+        content: 'New answer',
       }
     })
  
-  expect(questionOnDataBase).toBeTruthy()
+  expect(answerOnDatabase).toBeTruthy()
 
   })
 })
