@@ -19,6 +19,14 @@ import { AnswerQuestionController } from "./controllers/answer-question.controll
 import { AnswerQuestionUseCase } from "@/domain/forum/application/use-cases/answer-question";
 import { EditAnswerController } from "./controllers/edit-answer.controller";
 import { EditAnswerUseCase } from "@/domain/forum/application/use-cases/edit-answer";
+import { DeleteAnswerController } from "./controllers/delete-answer.controller";
+import { DeleteAnswerUseCase } from "@/domain/forum/application/use-cases/delete-answer";
+import { FetchQuestionAnswersController } from "./controllers/fetch-question-answers.controller";
+import { FetchQuestionAnswersUseCase } from "@/domain/forum/application/use-cases/fetch-question-answers";
+import { ChooseQuestionBestAnswersController } from "./controllers/choose-question-best-answer.controller";
+import { ChooseQuestionBestAnswerUseCase } from "@/domain/forum/application/use-cases/choose-question-best-answer";
+import { CommentOnQuestionUseCase } from "@/domain/forum/application/use-cases/comment-on-question";
+import { CommentOnQuestionController } from "./controllers/comment-on-question.controller";
 
 @Module({
   imports: [ DataBaseModule, CryptographyModule],
@@ -31,7 +39,11 @@ import { EditAnswerUseCase } from "@/domain/forum/application/use-cases/edit-ans
     EditQuestionsController,
     DeleteQuestionController,
     AnswerQuestionController,
-    EditAnswerController
+    EditAnswerController,
+    DeleteAnswerController,
+    FetchQuestionAnswersController,
+    ChooseQuestionBestAnswersController,
+    CommentOnQuestionController
   ],
   providers: [
     CreateQuestionUseCase,
@@ -42,7 +54,11 @@ import { EditAnswerUseCase } from "@/domain/forum/application/use-cases/edit-ans
     EditQuestionUseCase,
     DeleteQuestionUseCase,
     AnswerQuestionUseCase,
-    EditAnswerUseCase
+    EditAnswerUseCase,
+    DeleteAnswerUseCase,
+    FetchQuestionAnswersUseCase,
+    ChooseQuestionBestAnswerUseCase,
+    CommentOnQuestionUseCase
   ]
 })
 export class HttpModule {
