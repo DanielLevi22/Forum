@@ -1,7 +1,3 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { CreateQuestionUseCase } from './create-question'
-import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
-import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
 import { RegisterStudentUseCase } from './register-student'
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 import { FakeHasher } from 'test/cryptopgraphy/faker-hasher'
