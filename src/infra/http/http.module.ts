@@ -27,6 +27,16 @@ import { ChooseQuestionBestAnswersController } from "./controllers/choose-questi
 import { ChooseQuestionBestAnswerUseCase } from "@/domain/forum/application/use-cases/choose-question-best-answer";
 import { CommentOnQuestionUseCase } from "@/domain/forum/application/use-cases/comment-on-question";
 import { CommentOnQuestionController } from "./controllers/comment-on-question.controller";
+import { DeleteQuestionCommentController } from "./controllers/delete-question-comment.controller";
+import { DeleteQuestionCommentUseCase } from "@/domain/forum/application/use-cases/delete-question-comment";
+import { CommentOnAnswerController } from "./controllers/comment-on-answer.controller";
+import { CommentOnAnswerUseCase } from "@/domain/forum/application/use-cases/comment-on-answer";
+import { DeleteAnswerCommentUseCase } from "@/domain/forum/application/use-cases/delete-answer-comment";
+import { DeleteAnswerCommentController } from "./controllers/delete-answer-comment.controller";
+import { FetchQuestionCommentsController } from "./controllers/fetch-question-comments.controller";
+import { FetchQuestionCommentsUseCase } from "@/domain/forum/application/use-cases/fetch-question-comments";
+import { FetchAnswerCommentsController } from "./controllers/fetch-answer-comments.controller";
+import { FetchAnswerCommentsUseCase } from "@/domain/forum/application/use-cases/fetch-answer-comments";
 
 @Module({
   imports: [ DataBaseModule, CryptographyModule],
@@ -43,7 +53,13 @@ import { CommentOnQuestionController } from "./controllers/comment-on-question.c
     DeleteAnswerController,
     FetchQuestionAnswersController,
     ChooseQuestionBestAnswersController,
-    CommentOnQuestionController
+    CommentOnQuestionController,
+    DeleteQuestionCommentController,
+    CommentOnAnswerController,
+    DeleteAnswerCommentController,
+    FetchQuestionCommentsController,
+    FetchAnswerCommentsController
+
   ],
   providers: [
     CreateQuestionUseCase,
@@ -58,7 +74,13 @@ import { CommentOnQuestionController } from "./controllers/comment-on-question.c
     DeleteAnswerUseCase,
     FetchQuestionAnswersUseCase,
     ChooseQuestionBestAnswerUseCase,
-    CommentOnQuestionUseCase
+    CommentOnQuestionUseCase,
+    DeleteQuestionCommentUseCase,
+    CommentOnAnswerUseCase,
+    DeleteAnswerCommentUseCase,
+    FetchQuestionCommentsUseCase,
+    FetchAnswerCommentsUseCase
+
   ]
 })
 export class HttpModule {
