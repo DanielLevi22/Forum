@@ -51,7 +51,7 @@ describe('Fetch  question answers (E2E)', () => {
   .send()
 
 
-  console.log(response.body)
+
   
     expect(response.statusCode).toEqual(200)
     expect(response.body).toEqual({
