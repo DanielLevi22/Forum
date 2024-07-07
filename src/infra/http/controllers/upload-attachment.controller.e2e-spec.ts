@@ -5,9 +5,6 @@ import request from 'supertest'
 import { JwtService } from "@nestjs/jwt";
 import { StudentFactory } from "test/factories/make-student";
 import { DataBaseModule } from "@/infra/database/database.module";
-import { QuestionFactory } from "test/factories/make-question";
-import { Slug } from "@/domain/forum/enterprise/entities/value-objects/slug";
-import { a } from "vitest/dist/suite-MFRDkZcV";
 
 
 describe('Upload attachment', () => {
