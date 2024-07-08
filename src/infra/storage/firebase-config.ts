@@ -13,7 +13,6 @@ export class FirebaseService {
   public storage: FirebaseStorage;
 
   constructor(private envService: EnvService) {
-    // Configurações do Firebase a partir das variáveis de ambiente
     const firebaseConfig = {
       apiKey: this.envService.get('FIREBASE_API_KEY'),
       authDomain: this.envService.get('FIREBASE_AUTH_DOMAIN'),
@@ -23,7 +22,6 @@ export class FirebaseService {
       appId: this.envService.get('FIREBASE_APP_ID')
     };
 
-    // Inicializa o Firebase com as configurações
     this.firebaseApp = initializeApp(firebaseConfig);
     this.firestore = getFirestore(this.firebaseApp);
     this.storage = getStorage(this.firebaseApp);

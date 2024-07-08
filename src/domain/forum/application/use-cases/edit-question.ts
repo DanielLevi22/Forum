@@ -23,6 +23,7 @@ type EditQuestionUseCaseResponse = Either<
     question: Question
   }
 >
+
 @Injectable()
 export class EditQuestionUseCase {
   constructor(
