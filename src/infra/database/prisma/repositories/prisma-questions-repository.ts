@@ -4,12 +4,14 @@ import { Question } from "@/domain/forum/enterprise/entities/question";
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma.service";
 import { PrismaQuestionMapper } from "../mappers/prisma-question-mapper";
+import { QuestionAttachmentsRepository } from "@/domain/forum/application/repositories/question-attachments-repository";
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
 
   constructor(
-    private prisma: PrismaService
+    private prisma: PrismaService,
+    private questionAttachmentRepository: QuestionAttachmentsRepository
   ) {}
 
 async  findById(id: string): Promise<Question | null> {
@@ -58,16 +60,25 @@ async findManyRecent({page}: PaginationParams): Promise<Question[]> {
     await this.prisma.question.create({
       data
     })
+
+    await this.questionAttachmentRepository.creatMany(question.attachments.getItems())
   }
 
   async save(question: Question): Promise<void> {
     const data  = PrismaQuestionMapper.toPrisma(question)
-    await this.prisma.question.update({
-      where: {
-        id: data.id
-      },
-      data
-    })
+    await Promise.all([
+       this.prisma.question.update({
+        where: {
+          id: data.id
+        },
+        data
+      }),
+       this.questionAttachmentRepository.creatMany(question.attachments.getNewItems()),
+       this.questionAttachmentRepository.deleteMany(question.attachments.getRemovedItems())
+  
+    ])
+  
+
   }
  async delete(question: Question): Promise<void> {
   const data  = PrismaQuestionMapper.toPrisma(question)
